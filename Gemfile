@@ -10,8 +10,8 @@ gem "rubyzip",      "~> 0.9.4", :require => "zip/zip"
 gem "tzinfo",       "~> 0.3.23"
 
 # Activate the database connector that is appropriate for your environment
-gem "pg"
-#gem "mysql"
+#gem "pg"
+gem "mysql"
 #gem "sqlite3-ruby", :require => "sqlite3"
 
 group :development do
@@ -20,3 +20,5 @@ group :development do
   gem "ruby-debug"
   gem "termios"
 end
+
+gem "rdoc"
