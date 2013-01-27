@@ -18,9 +18,6 @@
         <li <%= nav_class_for(contacts_url) %>>
           <%= link_to('Contacts', contacts_path) %>
         </li>
-        <li <%= nav_class_for(privacy_url) %>>
-          <%= link_to('Privacy Policy', privacy_path) %>
-        </li>
         <li <%= nav_class_for(faq_url) %>>
           <%= link_to('FAQ', faq_path) %>
         </li>
@@ -58,9 +55,6 @@
     <li <%= nav_class_for('register') %>>
       <%= link_to('Register', registration_path) %>
       <ul>
-        <li <%= nav_class_for(registration_forms_url) %>>
-          <%= link_to('Registration Forms', registration_forms_path) %>
-        </li>
         <li <%= nav_class_for(online_registration_url) %>>
           <%= link_to('Online Registration', online_registration_path) %>
         </li>
