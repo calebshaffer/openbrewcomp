@@ -1,0 +1,23 @@
+%% LyX 2.0.5.1 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{babel}
+\begin{document}
+
+\title{World Cup of Beer 2013}
+
+\maketitle
+Name <%= l(e.entrant.postal_address(:include_country => false)).gsub("\n"," \\\\newline ") -%>
+Phone <%= l(e.entrant.phone) -%>
+Email <%= l(e.entrant.email) -%>
+
+\begin{enumerate}
+  <%- columns = @entries.collect{|e| [e] * e.style.number_of_bottles_required}.flatten.in_groups_of(3,false) -%>
+  <%- columns.each do |slice| -%>
+\item <%= l(truncate(e.name, :length => 40)) -%> <%= "#{e.style.category} -- #{e.style.name}" -%> <%= e.registration_code -%>
+      <%- end -%>
+\end{enumerate}
+
+\end{document}
