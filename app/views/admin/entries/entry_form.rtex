@@ -9,13 +9,12 @@
 \title{World Cup of Beer 2013}
 
 \maketitle
-Name <%= l(e.entrant.postal_address(:include_country => false)).gsub("\n"," \\\\newline ") -%>
-Phone <%= l(e.entrant.phone) -%>
-Email <%= l(e.entrant.email) -%>
+Name Tim McNerney
+Phone 5151-15-15-15
+Email tim@blahbla.com
 
 \begin{enumerate}
-  <%- columns = @entries.collect{|e| [e] * e.style.number_of_bottles_required}.flatten.in_groups_of(3,false) -%>
-  <%- columns.each do |slice| -%>
+  <%- @entries.each do |e| -%>
 \item <%= l(truncate(e.name, :length => 40)) -%> <%= "#{e.style.category} -- #{e.style.name}" -%> <%= e.registration_code -%>
       <%- end -%>
 \end{enumerate}

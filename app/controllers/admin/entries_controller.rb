@@ -2,7 +2,7 @@
 
 class Admin::EntriesController < AdministrationController
 
-  before_filter :update_config, :except => :bottle_labels
+  before_filter :update_config, :except => [ :bottle_labels, :entry_form ]
 
   active_scaffold :entry do |config|
     config.label = 'Entries'
@@ -149,6 +149,22 @@ class Admin::EntriesController < AdministrationController
     end
   end
 
+  def entry_form
+    @entries = current_user.entries.find(:all,
+                                         :include => [ :entrant, :style ],
+                                         :conditions => [ 'bottle_code IS NULL' ],
+                                         :order => 'entrants.id, entries.id')
+    unless @entries.empty?
+      @competition_name = competition_name
+      render_pdf 'entry_form.pdf'
+    else
+      # We should not normally get here since the 'Print All' link should be
+      # hidden if no entries have been registered.
+      flash[:error] = 'You have not registered any entries'
+      request.env['HTTP_REFERER'] ? redirect_to(:back) : redirect_to(online_registration_url)
+    end
+  end
+
   def entrant
     @entrant_id = params[:id]
   end
@@ -212,7 +228,7 @@ class Admin::EntriesController < AdministrationController
 
     def authorized?
       @is_admin_view = !params[:parent_model] || !!session[:entrants_admin_view]
-      if @is_admin_view && params[:action] != 'bottle_labels'
+      if @is_admin_view && params[:action] != 'entry_form' && params[:action] != 'bottle_labels'
         super
       else
         logged_in? && (params[:id].nil? ||

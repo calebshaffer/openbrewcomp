@@ -114,7 +114,7 @@ ActionController::Routing::Routes.draw do |map|
                     :collection => {
                       :print => :get,
                       :help => :get,
-                      :bottle_labels => :get
+                      :bottle_labels => :get,
                       :entry_form => :get
                     }
     admin.resources :entries_with_styleinfo, :active_scaffold => true,
