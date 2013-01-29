@@ -34,6 +34,11 @@
             <div class="clearfloat"></div>
             <%= render :active_scaffold => 'admin/entrants',
                        :constraints => { :user_id => current_user.id } %>
+              <p>
+                Click here to
+                <a href="/register/complete">complete</a> your registration and
+                pay for your entry.
+              </p>
           </div>
         </div>
       </li>

@@ -75,6 +75,7 @@ ActionController::Routing::Routes.draw do |map|
   map.registration        '/register',        :controller => 'register',                      :conditions => { :method => :get }
   map.online_registration '/register/online', :controller => 'register', :action => 'online', :conditions => { :method => :get }
   map.registration_forms  '/register/forms',  :controller => 'register', :action => 'forms',  :conditions => { :method => :get }
+  map.registration_complete  '/register/complete',  :controller => 'register', :action => 'complete',  :conditions => { :method => :get }
 
   # Judge confirmation
   map.judge_confirmation '/judge_confirmation/:key', :controller => 'register',
@@ -114,6 +115,7 @@ ActionController::Routing::Routes.draw do |map|
                       :print => :get,
                       :help => :get,
                       :bottle_labels => :get
+                      :entry_form => :get
                     }
     admin.resources :entries_with_styleinfo, :active_scaffold => true,
                     :member => { :entrant => :get }

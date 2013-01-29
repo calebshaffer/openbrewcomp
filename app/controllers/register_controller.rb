@@ -22,6 +22,11 @@ class RegisterController < ApplicationController
       @auto_edit_judge_id = flash[:auto_edit_judge_id]
       flash.keep#(:warning)
     end
+    @entry_count = current_user.entries.count
+  end
+
+  def complete
+    @entry_count = current_user.entries.count
   end
 
   def judge_confirmation

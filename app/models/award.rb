@@ -5,7 +5,7 @@ class Award < ActiveRecord::Base
 
   # Maximum number of entries by a single entrant in an award category.
   # Set MAX_ENTRIES = nil if you do not impose an entry limit.
-  MAX_ENTRIES = 2
+  MAX_ENTRIES = nil
 
   has_many :styles, :dependent => :destroy
   has_many :flights, :dependent => :destroy

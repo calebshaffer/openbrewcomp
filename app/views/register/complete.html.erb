@@ -1,0 +1,28 @@
+<% @page_title = "#{competition_name} Online Registration" %>
+
+Please download and print your bottle labels and then click on the
+"Buy now" button to go to Google Checkout to pay for your entries.
+  <br />
+  <br />
+  <%= link_to_with_icon('Download all bottle labels',
+                        bottle_labels_admin_entries_path,
+                        { :extname => '.pdf', :popup => true }) %>
+  and your
+  <%= link_to_with_icon('Entry Form',
+                        bottle_labels_admin_entries_path,
+                        { :extname => '.pdf', :popup => true }) %>
+  <br />
+  <br />
+  Note: Printed bottle labels will not include entries that have already been
+  checked in.
+  <br />
+  <br />
+<form action="https://checkout.google.com/api/checkout/v2/checkoutForm/Merchant/227877347124679" id="BB_BuyButtonForm" method="post" name="BB_BuyButtonForm" target="_top">
+    <input name="item_name_1" type="hidden" value="World Cup Entry"/>
+    <input name="item_description_1" type="hidden" value="Entry fee for a beer, cider or mead."/>
+    <input name="item_quantity_1" type="hidden" value="<%= @entry_count %>"/>
+    <input name="item_price_1" type="hidden" value="8.0"/>
+    <input name="item_currency_1" type="hidden" value="USD"/>
+    <input name="_charset_" type="hidden" value="utf-8"/>
+    <input alt="" src="https://checkout.google.com/buttons/buy.gif?merchant_id=227877347124679&amp;w=117&amp;h=48&amp;style=trans&amp;variant=text&amp;loc=en_US" type="image"/>
+</form>
