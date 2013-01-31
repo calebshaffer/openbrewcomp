@@ -1,6 +1,8 @@
 %% LyX 2.0.5.1 created this file.  For more info, see http://www.lyx.org/.
 %% Do not edit unless you really know what you are doing.
-\documentclass[english]{article}
+\documentclass[14pt]{extarticle}
+%\documentclass[9pt]{extarticle}
+%\documentclass[english]{proc}
 \usepackage[T1]{fontenc}
 \usepackage[latin9]{inputenc}
 \usepackage{babel}
@@ -8,15 +10,33 @@
 
 \title{World Cup of Beer 2013}
 
-\maketitle
-Name Tim McNerney
-Phone 5151-15-15-15
-Email tim@blahbla.com
+\maketitle 
+\\
+\textbf{Name} <%= @entries[0].entrant.name -%> \\
+\textbf{Phone} <%= @entries[0].entrant.phone -%> \\
+\textbf{Email} <%= @entries[0].entrant.email -%> \\
+\textbf{Address} <%= @entries[0].entrant.address -%> \\
+\textbf{City} <%= @entries[0].entrant.city -%> \\
+\textbf{Zip} <%= @entries[0].entrant.address3 -%> \\
+\textbf{Postal} <%= @entries[0].entrant.postal_address -%> \\
+\textbf{Club} <%= @entries[0].entrant.club_name -%> \\
+\textbf{Id} <%= @entries[0].entrant.id -%> \\
+\textbf{Dictionary name} <%= @entries[0].entrant.dictionary_name -%> \\
+\textbf{Expanded name} <%= @entries[0].entrant.expanded_name -%> \\
+\textbf{kw name} <%= @entries[0].class -%> \\
+\textbf{cw name} <%= @entrant.class -%> \\
+\textbf{zw name} <%= @eentrant.class -%> \\
+\textbf{rw name} <%= @entries.class -%> \\
 
-\begin{enumerate}
+\begin{center}
+\begin{tabular}{ | 1 | 1 | 1 | 1 |}
+  \hline
+Entry & Style & Name & Notes \\ \hline
   <%- @entries.each do |e| -%>
-\item <%= l(truncate(e.name, :length => 40)) -%> <%= "#{e.style.category} -- #{e.style.name}" -%> <%= e.registration_code -%>
+<%= e.registration_code -%> & <%= "#{e.style.category} -- #{e.style.name}" -%> & <%= l(truncate(e.name, :length => 40)) -%> & <%= e.style_info -%> \\
       <%- end -%>
-\end{enumerate}
+\hline
+\end{tabular}
+\end{center}
 
 \end{document}
