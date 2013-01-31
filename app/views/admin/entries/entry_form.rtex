@@ -1,41 +1,34 @@
-%% LyX 2.0.5.1 created this file.  For more info, see http://www.lyx.org/.
-%% Do not edit unless you really know what you are doing.
-\documentclass[14pt]{extarticle}
-%\documentclass[9pt]{extarticle}
-%\documentclass[english]{proc}
-\usepackage[T1]{fontenc}
-\usepackage[latin9]{inputenc}
-\usepackage{babel}
+\documentclass[a4paper,12pt,BCOR10mm,oneside,headsepline]{scrartcl}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{wasysym}% provides \ocircle and \Box
+\usepackage{enumitem}% easy control of topsep and leftmargin for lists
+\usepackage{color}% used for background color
+\usepackage{forloop}% used for \Qrating and \Qlines
+\usepackage{ifthen}% used for \Qitem and \QItem
+\usepackage{typearea}
+\areaset{17cm}{26cm}
+\setlength{\topmargin}{-1cm}
+\usepackage{scrpage2}
+\pagestyle{scrheadings}
+\LARGE\textbf {World Cup of Beer 2013} \\
+
 \begin{document}
+{\large\textbf {Please include this form with your entries and make sure to pay your entry fee by clicking on the Pay Now button on the registration site.}} \\
 
-\title{World Cup of Beer 2013}
-
-\maketitle 
 \\
-\textbf{Name} <%= @entries[0].entrant.name -%> \\
+\textbf{Entrant} <%= @entries[0].entrant.postal_address -%> \\
+\textbf{Id} <%= @entries[0].entrant.id -%> \\
 \textbf{Phone} <%= @entries[0].entrant.phone -%> \\
 \textbf{Email} <%= @entries[0].entrant.email -%> \\
-\textbf{Address} <%= @entries[0].entrant.address -%> \\
-\textbf{City} <%= @entries[0].entrant.city -%> \\
-\textbf{Zip} <%= @entries[0].entrant.address3 -%> \\
-\textbf{Postal} <%= @entries[0].entrant.postal_address -%> \\
-\textbf{Club} <%= @entries[0].entrant.club_name -%> \\
-\textbf{Id} <%= @entries[0].entrant.id -%> \\
-\textbf{Dictionary name} <%= @entries[0].entrant.dictionary_name -%> \\
-\textbf{Expanded name} <%= @entries[0].entrant.expanded_name -%> \\
-\textbf{kw name} <%= @entries[0].class -%> \\
-\textbf{cw name} <%= @entrant.class -%> \\
-\textbf{zw name} <%= @eentrant.class -%> \\
-\textbf{rw name} <%= @entries.class -%> \\
 
 \begin{center}
 \begin{tabular}{ | 1 | 1 | 1 | 1 |}
   \hline
-Entry & Style & Name & Notes \\ \hline
+\textbf{Entry} & Style & Name & Notes \\ \hline \hline
   <%- @entries.each do |e| -%>
-<%= e.registration_code -%> & <%= "#{e.style.category} -- #{e.style.name}" -%> & <%= l(truncate(e.name, :length => 40)) -%> & <%= e.style_info -%> \\
+<%= e.registration_code -%> & <%= "#{e.style.category} -- #{e.style.name}" -%> & <%= l(truncate(e.name, :length => 40)) -%> & <%= e.style_info -%> \\ \hline
       <%- end -%>
-\hline
 \end{tabular}
 \end{center}
 

@@ -163,6 +163,7 @@ class Admin::EntriesController < AdministrationController
       flash[:error] = 'You have not registered any entries'
       request.env['HTTP_REFERER'] ? redirect_to(:back) : redirect_to(online_registration_url)
     end
+    @ename = current_user.name
   end
 
   def entrant

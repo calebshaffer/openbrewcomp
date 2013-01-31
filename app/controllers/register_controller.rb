@@ -27,6 +27,7 @@ class RegisterController < ApplicationController
 
   def complete
     @entry_count = current_user.entries.count
+    @entry_id = current_user.id
   end
 
   def judge_confirmation
