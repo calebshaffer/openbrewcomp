@@ -43,54 +43,6 @@
         </div>
       </li>
 
-      <li id="online-regform-item">
-        <div class="step" onclick="toggleDiv('online-regform', true);">
-          <span class="step-marker" id="online-regform-step-marker"></span>
-          <span class="step-text" id="online-regform-open">
-            Fill out a registration form
-          </span>
-        </div>
-        <div class="openstep" id="online-regform" style="display: none">
-          <div>
-            <span class="close-button" title="close"
-                  onclick="toggleDiv('online-regform', true);">Close</span>
-            <div class="clearfloat"></div>
-            <div class="step-instructions">
-              <p>
-                Print a <%= link_to_with_icon('registration form', doc_path('registration.pdf'), :popup => true) %>,
-                grab a pen, and fill it out.
-              </p>
-            </div>
-          </div>
-        </div>
-      </li>
-
-      <li id="online-send-item">
-        <div class="step" onclick="toggleDiv('online-send', true);">
-          <span class="step-marker" id="online-send-step-marker"></span>
-          <span class="step-text" id="online-send-open">
-            Send in your entries, registration form, and payment
-          </span>
-        </div>
-        <div class="openstep" id="online-send" style="display: none">
-          <div>
-            <span class="close-button" title="close"
-                  onclick="toggleDiv('online-send', true);">Close</span>
-            <div class="clearfloat"></div>
-            <div class="step-instructions">
-              <p>
-                Apply your <%= link_to_with_icon('bottle labels',
-                                                 bottle_labels_admin_entries_path,
-                                                 { :extname => '.pdf',
-                                                   :popup => true }) %>
-                to your entries and follow the <%= link_to('shipping instructions',
-                                                           shipping_path) %>
-                to send your entries, registration form, and payment.
-              </p>
-            </div>
-          </div>
-        </div>
-      </li>
     <%- else -%>
       <li>
         <div class="disabled-step">
