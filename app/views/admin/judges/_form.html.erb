@@ -50,6 +50,7 @@
       <%= render :partial => form_partial_for_column(colhash[:checked_in]), :locals => { :column => colhash[:checked_in] } -%>
     </li>
   <% end -%>
+  <li><span style="color:red; font-weight:bold;">Stewards, please select a "Judge Rank" of "Steward"</span></li>
   <li class="form-element required">
     <%= render :partial => form_partial_for_column(colhash[:judge_rank]), :locals => { :column => colhash[:judge_rank] } -%>
   </li>

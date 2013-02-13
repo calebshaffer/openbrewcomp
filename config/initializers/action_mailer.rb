@@ -6,9 +6,9 @@
 
 ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {
-  :address => 'fqdn.of.smtp.host', # The hostname of the SMTP server
+  :address => 'localhost', # The hostname of the SMTP server
   :port => 25,                     # Change only if the SMTP server is on a non-standard port
-  :domain => 'fqdn.of.sender',     # The hostname of the sender
+  :domain => 'bayareamashers.org',     # The hostname of the sender
   :username => nil,                # Username for authentication, if required
   :password => nil,                # Password for authentication, if required
   :authentication => nil           # Authentication method (:plain, :login, or :cram_md5), if required
