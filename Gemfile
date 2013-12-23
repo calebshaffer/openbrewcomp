@@ -1,4 +1,4 @@
-source :gemcutter
+source 'https://rubygems.org'
 
 gem "rails",        "2.3.5"
 gem "fastercsv",    "~> 1.5.3"
