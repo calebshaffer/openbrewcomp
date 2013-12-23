@@ -64,7 +64,7 @@ class Admin::ReportsController < AdministrationController
   end
 
   def report_excess_entries
-    @entrants = Award::MAX_ENTRIES ? Entrant.find_by_sql(sql_for(:excess_entries)) : nil
+    @entrants = Award::MAX_ENTRIES ? Entrant.find_by_sql(sql_for(:excess_entries)) : []
 
     if request.xhr?
       render :partial => 'excess', :object => @entrants, :layout => false
