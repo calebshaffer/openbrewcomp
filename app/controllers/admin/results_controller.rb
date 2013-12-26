@@ -112,7 +112,7 @@ class Admin::ResultsController < AdministrationController
             data << [ record.qualifying_style, record.expanded_name, record.club.name, record.address, record.city, record.region.region_code, record.postcode, record.phone, record.email ]
           end
         end
-        send_data(Iconv.iconv("CP1252//TRANSLIT", "UTF-8", csv_data), :filename => "mcab_report.csv")
+        send_data(Iconv.conv("CP1252//TRANSLIT", "UTF-8", csv_data), :filename => "mcab_report.csv")
       }
     end
   end
