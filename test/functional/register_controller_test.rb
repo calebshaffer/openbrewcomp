@@ -64,6 +64,8 @@ class RegisterControllerTest < ActionController::TestCase
   end
 
   def test_should_show_registration_not_available_message_when_start_and_end_times_not_defined
+    login_as(:testuser1)
+
     cd = CompetitionData.instance
     cd.entry_registration_start_time_utc = nil
     cd.entry_registration_end_time_utc = nil
@@ -136,6 +138,8 @@ class RegisterControllerTest < ActionController::TestCase
   end
 
   def test_should_show_countdown_timer_when_start_time_less_than_2_weeks_away
+    login_as(:testuser1)
+
     now = Time.now
     start_time = now + 1.week
     end_time = now + 4.weeks
@@ -190,6 +194,8 @@ class RegisterControllerTest < ActionController::TestCase
   end
 
   def test_should_not_show_countdown_timer_when_start_time_more_than_2_weeks_away
+    login_as(:testuser1)
+
     cd = CompetitionData.instance
     cd.entry_registration_start_time_utc = 4.weeks.from_now.utc
     cd.entry_registration_end_time_utc = 8.weeks.from_now.utc
@@ -230,6 +236,8 @@ class RegisterControllerTest < ActionController::TestCase
   end
 
   def test_should_show_registration_window_closed_when_past_end_time
+    login_as(:testuser1)
+  
     cd = CompetitionData.instance
     cd.entry_registration_start_time_utc = 1.week.ago.utc
     cd.entry_registration_end_time_utc = 1.hour.ago.utc

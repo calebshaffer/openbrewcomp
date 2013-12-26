@@ -64,7 +64,7 @@ class Admin::ReportsController < AdministrationController
   end
 
   def report_excess_entries
-    @entrants = Award::MAX_ENTRIES ? Entrant.find_by_sql(sql_for(:excess_entries)) : nil
+    @entrants = Award.max_entries ? Entrant.find_by_sql(sql_for(:excess_entries)) : []
 
     if request.xhr?
       render :partial => 'excess', :object => @entrants, :layout => false
@@ -140,7 +140,7 @@ class Admin::ReportsController < AdministrationController
   WHERE entrants.id = entries.entrant_id AND styles.id = entries.style_id AND awards.id = styles.award_id
         #{"AND #{processed_condition}" unless processed_condition.nil?}
   GROUP BY styles.award_id, awards.name, #{Entrant.columns.collect{|c| "entrants.#{c.name}"}.join(", ")}
-  HAVING COUNT(styles.award_id) > #{Award::MAX_ENTRIES}
+  HAVING COUNT(styles.award_id) > #{Award.max_entries}
   ORDER BY entrants.id, styles.award_id
 }
             end

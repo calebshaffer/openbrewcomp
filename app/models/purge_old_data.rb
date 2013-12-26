@@ -3,7 +3,7 @@
 require 'set'
 require 'tsort'
 
-class PurgeOldData < ActiveRecord::Base
+class PurgeOldData
 
   attr_reader :errors
 

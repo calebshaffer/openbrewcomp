@@ -5,6 +5,7 @@ require File.dirname(__FILE__) + '/../../test_helper'
 class Admin::ReportsControllerTest < ActionController::TestCase
 
   def setup
+    Award.stubs(:max_entries).returns(2)
     login_as(:admin)
     @competition_name = CompetitionData.instance.name
   end

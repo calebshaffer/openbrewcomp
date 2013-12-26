@@ -1,4 +1,4 @@
-source :gemcutter
+source 'https://rubygems.org'
 
 gem "rails",        "2.3.5"
 gem "fastercsv",    "~> 1.5.3"
@@ -19,6 +19,10 @@ group :development do
   gem "capistrano-ext"
   gem "ruby-debug"
   gem "termios"
+end
+
+group :test do
+  gem "mocha", "~> 0.12.8", :require => false
 end
 
 gem "rdoc"
