@@ -208,6 +208,7 @@ class InitializeSystem < ActiveRecord::Migration
       t.boolean :odd_bottle, :second_round, :mcab_qe, :null => false, :default => false
       t.integer :bottle_code, :place, :bos_place
       t.boolean :send_award, :send_bos_award
+      t.boolean :is_paid,      :null => false, :default => false
       t.timestamps
       t.references :base_style, :references => :styles
       t.references :carbonation, :strength, :sweetness

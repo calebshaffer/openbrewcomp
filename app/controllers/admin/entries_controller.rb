@@ -7,7 +7,7 @@ class Admin::EntriesController < AdministrationController
   active_scaffold :entry do |config|
     config.label = 'Entries'
 
-    config.list.columns = [ :bottle_code, :registration_code,
+    config.list.columns = [ :bottle_code, :catnum_code, :registration_code, :is_paid,
                             :category, :name, :flights ]
 
     config.search.columns = [ :bottle_code, :registration_code,
