@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
 require File.dirname(__FILE__) + '/../../test_helper'
+# require 'action_view/test_case'
 
 class Admin::ReportsControllerTest < ActionController::TestCase
 
   def setup
+    Award.stubs(:max_entries).returns(2)
     login_as(:admin)
     @competition_name = CompetitionData.instance.name
   end

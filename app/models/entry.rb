@@ -211,7 +211,7 @@ class Entry < ActiveRecord::Base
                                                 :conditions => { :style_id => style.award.styles.map(&:id) },
                                                 :order => 'id ASC')
       end
-      @warning = "Warning: #{excess_error_message(category_entries, style, false)}" if Award::MAX_ENTRIES && category_entries.length > Award::MAX_ENTRIES
+      @warning = "Warning: #{excess_error_message(category_entries, style, false)}" if Award.max_entries && category_entries.length > Award.max_entries
     end
 
     def after_find
@@ -307,7 +307,7 @@ class Entry < ActiveRecord::Base
       msg = entrant.name
       msg << " has #{pluralize(category_entries.length, 'entry')} (#{category_entries.collect{|e| Controller.admin_view? ? e.bottle_code : e.registration_code}.to_sentence(:last_word_connector => true)}) in the #{style.award.name} category."
       msg << (html_formatting ? "<br />" : "\n\n")
-      msg << "A maximum of #{pluralize(Award::MAX_ENTRIES, 'entry')} per award category is allowed."
+      msg << "A maximum of #{pluralize(Award.max_entries, 'entry')} per award category is allowed."
       msg
     end
 

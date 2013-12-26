@@ -21,4 +21,8 @@ group :development do
   gem "termios"
 end
 
+group :test do
+  gem "mocha", "~> 0.12.8", :require => false
+end
+
 gem "rdoc"
