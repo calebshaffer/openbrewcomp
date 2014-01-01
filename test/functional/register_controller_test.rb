@@ -53,8 +53,6 @@ class RegisterControllerTest < ActionController::TestCase
           assert_select 'div div#content', false, 'Nested page found, probable authorization failure'
           assert_select 'div > div.active-scaffold', 1, 'Nested form missing'
         end
-        assert_select 'li#online-regform-item', 1
-        assert_select 'li#online-send-item', 1
         assert_select 'li#online-judges-item > div#online-judges' do
           assert_select 'div div#content', false, 'Nested page found, probable authorization failure'
           assert_select 'div > div.active-scaffold', 1, 'Nested form missing'
