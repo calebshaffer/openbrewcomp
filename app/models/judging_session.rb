@@ -2,7 +2,7 @@
 
 class JudgingSession < ActiveRecord::Base
 
-  has_many :flights
+  has_many :flights, :dependent => :destroy
 
   validates_presence_of :description
   validates_uniqueness_of :description, :case_sensitive => false,
