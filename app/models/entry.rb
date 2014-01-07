@@ -14,6 +14,7 @@ class Entry < ActiveRecord::Base
   has_many :scores, :dependent => :destroy
 
   named_scope :checked_in, :conditions => 'bottle_code IS NOT NULL'
+  named_scope :unpaid, :conditions => 'is_paid = false'
 
   validates_length_of :name, :maximum => 80, :allow_blank => true
 
@@ -25,6 +26,10 @@ class Entry < ActiveRecord::Base
   attr_accessor :classic_style, :classic_style_id
 
   attr_reader :warning
+
+  def fee
+    8
+  end
 
   def category
     style.nil? ? '' : style.category_and_name
@@ -59,6 +64,10 @@ class Entry < ActiveRecord::Base
     # to index such values instead of simple integers.
 
     created_at.nil? ? '' : created_at.year * 10000 + id
+  end
+
+  def catnum_code
+    'errp'
   end
 
   def checked_in?

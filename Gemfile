@@ -9,6 +9,7 @@ gem "ruby-openid",  "~> 2.1",   :require => "openid"
 gem "rubyzip",      "~> 0.9.4", :require => "zip/zip"
 gem "tzinfo",       "~> 0.3.23"
 gem "unicorn-rails"
+gem "paypal-sdk-merchant"
 
 # Activate the database connector that is appropriate for your environment
 #gem "pg"

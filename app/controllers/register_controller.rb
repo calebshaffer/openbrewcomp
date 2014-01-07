@@ -30,6 +30,59 @@ class RegisterController < ApplicationController
     @entry_id = current_user.id
   end
 
+  def paypal_checkout
+    entries = current_user.entries.unpaid
+
+    payment_details = entries.map do |entry|
+      {
+        :Name => entry.name,
+        :Description => entry.style.category_and_name,
+        :Number => entry.registration_code,
+        :Amount => {
+          :currencyID => "USD",
+          :value => entry.fee
+        },
+      }
+    end
+
+    total = entries.map(&:fee).sum
+
+    api = PayPal::SDK::Merchant::API.new
+    set_express_checkout = api.build_set_express_checkout({
+      :Version => "104.0",
+      :SetExpressCheckoutRequestDetails => {
+        :ReturnURL => registration_paypal_complete_url, 
+        :CancelURL => registration_complete_url,
+        :PaymentDetails => [
+          {
+            :OrderTotal => {
+              :currencyID => "USD",
+              :value => total,
+            },
+            :PaymentDetailsItem => payment_details,
+            :PaymentAction => "Sale"
+          }
+        ]
+      }
+    })
+
+    set_express_checkout_response = api.set_express_checkout(set_express_checkout)
+    express_checkout_token = set_express_checkout_response.token
+    redirect_to "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=#{express_checkout_token}"
+  end
+
+  def paypal_complete
+    puts params.inspect
+    api = PayPal::SDK::Merchant::API.new
+    get_express_checkout_details = api.build_get_express_checkout_details({
+      :Token => params[:token]
+    })
+    puts get_express_checkout_details.inspect
+
+    get_express_checkout_details_response = api.get_express_checkout_details(get_express_checkout_details)
+    puts get_express_checkout_details_response.inspect  
+  end
+
   def judge_confirmation
     if competition_data.is_registration_open?
       judge = Judge.find_by_access_key(params[:key])

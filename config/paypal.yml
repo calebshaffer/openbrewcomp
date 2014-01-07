@@ -1,0 +1,19 @@
+development: &default
+  username: chris.papazian-facilitator_api1.gmail.com
+  password: 1388887029
+  signature: AiPC9BjkCyDFQXbSkoZcgqH3hpacAYSNDyb39UCU51ABDLFkr00dckyM
+  app_id: APP-80W284485P519543T
+  http_timeout: 30
+  mode: sandbox
+  # # with certificate
+  # cert_path: "config/cert_key.pem"
+  # # with token authentication
+  # token: ESTy2hio5WJQo1iixkH29I53RJxaS0Gvno1A6.YQXZgktxbY4I2Tdg
+  # token_secret: ZKPhUYuwJwYsfWdzorozWO2U9pI
+  # # with Proxy
+  # http_proxy: http://proxy-ipaddress:3129/
+test:
+  <<: *default
+production:
+  <<: *default
+  mode: live

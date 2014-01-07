@@ -34,6 +34,7 @@ entries you've already paid for.
                         { :extname => '.pdf', :popup => true }) %>
   <br />
   <br />
+  <p><%= link_to(image_tag("http://www.paypalobjects.com/en_US/i/btn/btn_xpressCheckout.gif", :alt => "Check out with PayPal" ), registration_paypal_checkout_path) %></p>
 <form action="https://checkout.google.com/api/checkout/v2/checkoutForm/Merchant/227877347124679" id="BB_BuyButtonForm" method="post" name="BB_BuyButtonForm" target="_top">
     <input name="item_name_1" type="hidden" value="World Cup Entry"/>
     <input name="item_description_1" type="hidden" value="Entry fee for ID: <%= @entry_id %>."/>
