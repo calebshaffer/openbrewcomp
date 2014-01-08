@@ -49,7 +49,7 @@ class RegisterController < ApplicationController
 
     api = PayPal::SDK::Merchant::API.new
     set_express_checkout = api.build_set_express_checkout({
-      :Version => "104.0",
+      # :Version => "104.0",
       :SetExpressCheckoutRequestDetails => {
         :ReturnURL => registration_paypal_complete_url, 
         :CancelURL => registration_complete_url,
@@ -72,15 +72,57 @@ class RegisterController < ApplicationController
   end
 
   def paypal_complete
-    puts params.inspect
     api = PayPal::SDK::Merchant::API.new
     get_express_checkout_details = api.build_get_express_checkout_details({
+      # :Version => "104.0",
       :Token => params[:token]
     })
-    puts get_express_checkout_details.inspect
 
     get_express_checkout_details_response = api.get_express_checkout_details(get_express_checkout_details)
-    puts get_express_checkout_details_response.inspect  
+
+    paid_registration_codes = get_express_checkout_details_response.
+      get_express_checkout_details_response_details.
+      payment_details.map {|d| d.payment_details_item }.flatten.
+      map {|d| d.number.to_i }
+
+    paid_entries = current_user.entries.select {|e| paid_registration_codes.include? e.registration_code }
+
+    # if all registration codes are present in current user's unpaid list
+    if paid_entries.count == paid_registration_codes.count && paid_entries.map {|e| !e.is_paid }.all?
+      # TODO: factor this ... 
+      payer_id = get_express_checkout_details_response.
+        get_express_checkout_details_response_details.
+        payer_info.
+        payer_id
+
+      # puts get_express_checkout_details_response.inspect  
+      do_express_checkout_payment = api.build_do_express_checkout_payment({
+        # :Version => "104.0",
+        :DoExpressCheckoutPaymentRequestDetails => {
+          :Token => params[:token],
+          :PayerID => payer_id,
+          :PaymentDetails => {
+            :OrderTotal => {
+              :currencyID => "USD",
+              :value => paid_entries.map(&:fee).sum
+            },
+          },
+        }
+      })
+      do_express_checkout_payment_response = api.do_express_checkout_payment(do_express_checkout_payment)
+
+      if do_express_checkout_payment_response.ack == "Success"
+        # yay!!!!
+        paid_entries.each do |entry|
+          entry.is_paid = true
+          entry.save!
+        end
+      else
+        raise "payment confirmation failed"
+      end
+    else
+      raise "possible double payment"
+    end
   end
 
   def judge_confirmation
