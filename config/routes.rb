@@ -76,8 +76,11 @@ ActionController::Routing::Routes.draw do |map|
   map.online_registration '/register/online', :controller => 'register', :action => 'online', :conditions => { :method => :get }
   map.registration_forms  '/register/forms',  :controller => 'register', :action => 'forms',  :conditions => { :method => :get }
   map.registration_complete  '/register/complete',  :controller => 'register', :action => 'complete',  :conditions => { :method => :get }
-  map.registration_paypal_checkout '/register/paypal_checkout', :controller => 'register', :action => 'paypal_checkout', :conditions => { :method => :get }
-  map.registration_paypal_complete '/register/paypal_complete', :controller => 'register', :action => 'paypal_complete', :conditions => { :method => :get }
+
+  map.paypal '/paypal', :controller => 'paypal'
+  map.paypal_complete '/paypal/complete', :controller => 'paypal', :action => 'complete', :conditions => { :method => :get }
+  map.paypal_cancel '/paypal/cancel', :controller => 'paypal', :action => 'cancel', :conditions => { :method => :get }
+  map.paypal_notify '/paypal/notify', :controller => 'paypal', :action => 'notify', :conditions => { :method => :get }
 
   # Judge confirmation
   map.judge_confirmation '/judge_confirmation/:key', :controller => 'register',

@@ -12,6 +12,7 @@ class Entry < ActiveRecord::Base
   belongs_to :sweetness
   has_and_belongs_to_many :flights
   has_many :scores, :dependent => :destroy
+  has_and_belongs_to_many :orders
 
   named_scope :checked_in, :conditions => 'bottle_code IS NOT NULL'
   named_scope :unpaid, :conditions => 'is_paid = false'
