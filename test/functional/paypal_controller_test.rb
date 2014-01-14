@@ -5,8 +5,8 @@ require File.dirname(__FILE__) + '/../test_helper'
 class PaypalControllerTest < ActionController::TestCase
 
   def test_show
-    PaypalClient.any_instance.stubs(:set_express_checkout).returns(true)
-    PaypalClient.any_instance.stubs(:set_express_checkout_token).returns("token")
+    # PaypalClient.any_instance.stubs(:set_express_checkout).returns(true)
+    # PaypalClient.any_instance.stubs(:set_express_checkout_token).returns("token")
 
     login_as(:testuser1)
 

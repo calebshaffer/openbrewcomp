@@ -3,21 +3,23 @@
 class PaypalController < ApplicationController
 
   before_filter :login_required, :only => [:show] # should complete and cancel required login?
-  # before_filter :initialize_paypal_client
 
   def index
-    @entries = current_user.entries.unpaid
-    if @entries.empty? 
+    entries = current_user.entries.unpaid
+    if entries.empty? 
       flash[:notice] = 'No entries to pay for'
       redirect_to online_registration_path
     else
-      @paypal_client = PaypalClient.new(:set,
-        :complete_url => paypal_complete_url, 
-        :cancel_url => paypal_cancel_url
+      order = Order.new(
+        :user => current_user,
+        #TODO: entrant?
+        :entries => entries
       )
-      
-      if @paypal_client.set_express_checkout(@entries)
-        redirect_to @paypal_client.set_express_checkout_redirect
+      paypal_client = PaypalClient.new
+      if token = paypal_client.set_express_checkout(order.paypal_payment_details, paypal_complete_url, paypal_cancel_url)
+        order.paypal_express_checkout_token = token
+        order.save!
+        redirect_to "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=#{token}"
       else
         flash[:error] = 'Error setting up paypal transaction'
         redirect_to online_registration_path
@@ -26,12 +28,22 @@ class PaypalController < ApplicationController
   end
 
   def complete
-    # @entries = current_user.entries.unpaid # TODO: a better way to synchronize pending entries
-    @paypal_client = PaypalClient.new(:do,
-      :token => params[:token]
-    )
+    order = Order.find_by_paypal_express_checkout_token(params[:token])
+    order.paypal_payer_id = params[:PayerID]
+    order.save!
 
-    if @paypal_client.do_express_checkout
+    paypal_client = PaypalClient.new
+    
+    express_checkout_details_response = paypal_client.get_express_checkout_details(params[:token])
+    details = express_checkout_details_response.get_express_checkout_details_response_details
+
+    if order.verify_express_checkout_details(details) &&
+      transaction_id = paypal_client.do_express_checkout_payment(order)
+      
+      order.paypal_transaction_id = transaction_id
+      order.is_paid = true
+      order.save!
+
       flash[:notice] = 'Successfully processed paypal transaction'
       redirect_to online_registration_path
     else
