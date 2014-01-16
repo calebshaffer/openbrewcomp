@@ -1,6 +1,5 @@
 # config/unicorn.rb
-# worker_processes Integer(ENV["WEB_CONCURRENCY"] || 3)
-worker_processes (rails_env == 'production' ? 8 : 4)
+worker_processes Integer(ENV["WEB_CONCURRENCY"] || 3)
 timeout 15
 preload_app true
 listen "127.0.0.1:4000"
