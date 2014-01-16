@@ -3,6 +3,7 @@
 worker_processes (rails_env == 'production' ? 8 : 4)
 timeout 15
 preload_app true
+listen "127.0.0.1:4000"
 
 before_fork do |server, worker|
   Signal.trap 'TERM' do
