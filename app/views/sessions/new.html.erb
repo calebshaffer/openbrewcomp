@@ -12,27 +12,8 @@
           <%= f.label :password %>
           <%= f.password_field :password, :class => 'text-input', :size => 12, :maxlength => 40 %>
         </li>
-        <li>
-          <%= check_box_tag 'anonymous', '1', false, :onclick => 'toggleAnonLogin()' %>
-          <span>Register anonymously</span>
-        </li>
         <p class="flash-error"><%= h(flash[:login_error]) %></p>
       </ol>
-    </fieldset>
-
-    <div class="separator">
-      OR
-    </div>
-
-    <fieldset class="openid">
-      <ol>
-        <li>
-          <%= f.label :openid_url, 'OpenID URL' %>
-          <%= text_field_tag :openid_url, params[:openid_url] || params['openid.identity'], :class => 'text-input', :size=> 18 %>
-        </li>
-      </ol>
-      <p class="flash-error"><%= h(flash[:openid_error]) %></p>
-      <p><%= link_to 'What is OpenID?', 'http://www.openid.net/' %></p>
     </fieldset>
 
     <div class="form-buttons">
@@ -51,7 +32,7 @@
   </p>
   <p>
     If you already have a <%= competition_name %> account, enter your login
-    name and password or your OpenID.
+    name and password.
   </p>
   <p>
     If you do not have a <%= competition_name %> account, you can
@@ -86,11 +67,6 @@
       occur.)
     </li>
   </ol>
-  <p>
-    If you do not wish to create a <%= competition_name %> account, you may
-    register as an anonymous user. You will only be able to manage the
-    entries you create during the current session.
-  </p>
 </div>
 
 <script type="text/javascript">
