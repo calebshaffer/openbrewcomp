@@ -9,17 +9,17 @@ Download and print your bottle labels and attach to your bottles with a rubber b
 Download and print your entry form and include one copy with your entries.
 </li>
 <li>
-Click on the "Buy now" button to go to Google Checkout to pay for your entries.
+Click on the "Buy now" button to go to Paypal to pay for your entries.
 </li>
 <li>
 If you plan on entering more beers, please wait until you have all your beers entered before
-printing out the bottle labels, entry form and paying with Google Checkout. We will keep
+printing out the bottle labels, entry form and paying with Paypal. We will keep
 track of all your entries and will cover them at the end. If we reach our max entries, 
 anything you've already entered will still be valid and you can pay for those that
 were entered prior to reaching capacity.
 </li>
 <li>
-If you have already paid for your entries through Google Checkout but decide to add more,
+If you have already paid for your entries through Paypal but decide to add more,
 please contact the coordinator so that we can make sure you are not charged again for 
 entries you've already paid for.
 </li>
@@ -35,12 +35,4 @@ entries you've already paid for.
   <br />
   <br />
   <p><%= link_to(image_tag("http://www.paypalobjects.com/en_US/i/btn/btn_xpressCheckout.gif", :alt => "Check out with PayPal" ), paypal_path) %></p>
-<form action="https://checkout.google.com/api/checkout/v2/checkoutForm/Merchant/227877347124679" id="BB_BuyButtonForm" method="post" name="BB_BuyButtonForm" target="_top">
-    <input name="item_name_1" type="hidden" value="World Cup Entry"/>
-    <input name="item_description_1" type="hidden" value="Entry fee for ID: <%= @entry_id %>."/>
-    <input name="item_quantity_1" type="hidden" value="<%= @entry_count %>"/>
-    <input name="item_price_1" type="hidden" value="8.0"/>
-    <input name="item_currency_1" type="hidden" value="USD"/>
-    <input name="_charset_" type="hidden" value="utf-8"/>
-    <input alt="" src="https://checkout.google.com/buttons/buy.gif?merchant_id=227877347124679&amp;w=117&amp;h=48&amp;style=trans&amp;variant=text&amp;loc=en_US" type="image"/>
 </form>
