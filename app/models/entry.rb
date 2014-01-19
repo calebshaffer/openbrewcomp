@@ -29,7 +29,7 @@ class Entry < ActiveRecord::Base
   attr_reader :warning
 
   def fee
-    8
+    9
   end
 
   def category
