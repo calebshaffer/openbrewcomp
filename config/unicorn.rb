@@ -1,8 +1,13 @@
 # config/unicorn.rb
+APP_DIR = File.expand_path("../../", __FILE__)
+
 worker_processes Integer(ENV["WEB_CONCURRENCY"] || 3)
 timeout 15
 preload_app true
 listen "127.0.0.1:4000"
+
+stderr_path "#{APP_DIR}/log/unicorn.stderr.log"
+stdout_path "#{APP_DIR}/log/unicorn.stdout.log"
 
 before_fork do |server, worker|
   Signal.trap 'TERM' do
