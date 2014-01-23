@@ -67,10 +67,6 @@ class Entry < ActiveRecord::Base
     created_at.nil? ? '' : created_at.year * 10000 + id
   end
 
-  def catnum_code
-    'errp'
-  end
-
   def checked_in?
     !bottle_code.nil?
   end
