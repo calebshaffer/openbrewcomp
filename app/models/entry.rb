@@ -29,7 +29,11 @@ class Entry < ActiveRecord::Base
   attr_reader :warning
 
   def fee
-    9
+    if style.bjcp_category == 29
+      3
+    else
+      9
+    end
   end
 
   def category

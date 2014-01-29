@@ -70,6 +70,7 @@ ActionController::Routing::Routes.draw do |map|
   map.all_styles     '/styles/complete', :controller => 'styles', :action => 'all',     :conditions => { :method => :get }
   map.special_styles '/styles/special',  :controller => 'styles', :action => 'special', :conditions => { :method => :get }
   map.connect        '/styles/:action',  :controller => 'styles'
+  map.style_label    '/styles/label',    :controller => 'styles', :action => 'label'
 
   # Registration
   map.registration        '/register',        :controller => 'register',                      :conditions => { :method => :get }
