@@ -19,7 +19,7 @@ class PaypalController < ApplicationController
       if token = paypal_client.set_express_checkout(order.paypal_payment_details, paypal_complete_url, paypal_cancel_url)
         order.paypal_express_checkout_token = token
         order.save!
-        redirect_to "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=#{token}"
+        redirect_to paypal_client.express_checkout_url(token)
       else
         flash[:error] = 'Error setting up paypal transaction'
         redirect_to online_registration_path
@@ -38,9 +38,7 @@ class PaypalController < ApplicationController
     details = express_checkout_details_response.get_express_checkout_details_response_details
 
     if order.verify_express_checkout_details(details) &&
-      transaction_id = paypal_client.do_express_checkout_payment(order)
-      
-      order.paypal_transaction_id = transaction_id
+      order.paypal_transaction_id = paypal_client.do_express_checkout_payment(order)
       order.is_paid = true
       order.save!
 
@@ -58,6 +56,7 @@ class PaypalController < ApplicationController
   end
 
   def notify
+    puts params.inspect
   end
 
 end

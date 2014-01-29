@@ -23,6 +23,14 @@ class PaypalClient
     end
   end
 
+  def express_checkout_url(token)
+    if Rails.env == "production"
+      return "https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=#{token}"
+    else
+      return "https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=#{token}"
+    end
+  end
+
   def get_express_checkout_details(token)
     @api.get_express_checkout_details @api.build_get_express_checkout_details({
       :Token => token
