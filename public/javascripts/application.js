@@ -73,9 +73,17 @@ function showJudgeRankParams(id)
   }
 }
 
-function toggleTimeAvailability(id)
+function toggleTimeAvailability(element)
 {
-  $(id+'_start_time').disabled = $(id+'_end_time').disabled = !$(id).checked;
+  if ($(element).checked) {
+    $(element).insert({after: '<input type="hidden" id="' + element.id + '_start_time" name="' + element.attributes._name.value + '[start_time]" type="text" value="' + element.attributes.start_time.value +'">'});
+    $(element).insert({after: '<input type="hidden" id="' + element.id + '_end_time" name="' + element.attributes._name.value + '[end_time]" type="text" value="' + element.attributes.end_time.value +'">'});
+  }
+  else {
+    $(element.id + '_start_time').remove();
+    $(element.id + '_start_end').remove();
+  }
+
 }
 
 function toggleAnonLogin()
