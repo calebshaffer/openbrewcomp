@@ -14,7 +14,7 @@
         <%= hidden_field_tag("record[time_availabilities][#{i+1}][start_time]", judging_session.start_time) %>
         <%= hidden_field_tag("record[time_availabilities][#{i+1}][end_time]", judging_session.end_time) %>
       <% end %>
-      <span class="selectLabel">I am available to judge from <%= judging_session.start_time.strftime("%l:%M %p") %> to <%= judging_session.end_time.strftime("%l:%M %p") %> on <%= h(judging_session.date.to_s(:long)) %>.</span>
+      <span class="selectLabel">I am available to judge/steward from <%= judging_session.start_time.strftime("%l:%M %p") %> to <%= judging_session.end_time.strftime("%l:%M %p") %> on <%= h(judging_session.date.to_s(:long)) %>.</span>
     </li>
   <% end -%>
 </ol>
