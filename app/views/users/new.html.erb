@@ -57,29 +57,6 @@
       </ol>
     </fieldset>
 
-    <div class="separator">
-      OR
-    </div>
-
-    <fieldset class="openid">
-      <%- if flash[:openid_error] -%>
-        <div class="flash-error"><%= h flash[:openid_error] %></div>
-      <%- end -%>
-      <legend>Signup with OpenID</legend>
-
-      <ol>
-        <li>
-          <label for="openid_url">OpenID URL</label>
-          <%= text_field_tag :openid_url, params[:openid_url] || params['openid.identity'] %>
-          <%= f.error_message_on :openid_url %>
-        </li>
-      </ol>
-
-      <p>
-        <%= link_to "What is OpenID?", "http://www.openid.net/" %>
-      </p>
-    </fieldset>
-
     <div class="buttons">
       <%= submit_tag "Create Account" %>
       <%= link_to 'Cancel', login_path, :class => 'cancel' %>
