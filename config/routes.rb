@@ -81,7 +81,7 @@ ActionController::Routing::Routes.draw do |map|
   map.paypal '/paypal', :controller => 'paypal'
   map.paypal_complete '/paypal/complete', :controller => 'paypal', :action => 'complete', :conditions => { :method => :get }
   map.paypal_cancel '/paypal/cancel', :controller => 'paypal', :action => 'cancel', :conditions => { :method => :get }
-  map.paypal_notify '/paypal/notify', :controller => 'paypal', :action => 'notify', :conditions => { :method => :get }
+  #map.paypal_notify '/paypal/notify', :controller => 'paypal', :action => 'notify', :conditions => { :method => :get }
 
   # Judge confirmation
   map.judge_confirmation '/judge_confirmation/:key', :controller => 'register',

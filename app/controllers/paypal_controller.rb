@@ -55,8 +55,8 @@ class PaypalController < ApplicationController
     redirect_to registration_complete_url
   end
 
-  def notify
-    puts params.inspect
-  end
+  #def notify
+  #  puts params.inspect
+  #end
 
 end
